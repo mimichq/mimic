@@ -20,12 +20,14 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: true,
       nodeIntegrationInSubFrames: false,
-
       preload: preload,
     },
-    titleBarStyle: "hidden",
   });
   registerListeners(mainWindow);
+
+  if (inDevelopment) {
+    mainWindow.webContents.openDevTools();
+  }
 
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
